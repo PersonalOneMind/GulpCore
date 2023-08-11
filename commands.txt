@@ -20,3 +20,5 @@ npm i -D gulp-avif
 npm i -D gulp-webp
 npm i -D gulp-newer
 npm i -D gulp-svg-sprite
+npm i -D gulp-fonter
+npm i -D gulp-ttf2woff2
