@@ -17,6 +17,8 @@ const imagemin = require('gulp-imagemin');
 const newer = require('gulp-newer');
 const svgSprite = require('gulp-svg-sprite');
 const del = require('del');
+const fonter = require('gulp-fonter');
+const ttf2woff2 = require('gulp-ttf2woff2');
 
 function style() {
 	return src('./src/style/sass/style.sass')
@@ -40,7 +42,7 @@ function script() {
 }
 
 function html() {
-	return src('./src/**/*.pug')
+	return src(['./src/pages/**/*.pug', '!./src/pages/includes/*.pug'])
 		.pipe(pug({ pretty: true }))
 		.pipe(dest('./dist'))
 		.pipe(browserSync.stream());
@@ -84,6 +86,16 @@ function sprite() {
 		.pipe(dest('./dist/images/icons'))
 }
 
+function font() {
+	return src('./src/fonts/*.*')
+		.pipe(fonter({
+			formats: ['woff', 'ttf']
+		}))
+		.pipe(src('./dist/fonts/*.ttf'))
+		.pipe(ttf2woff2())
+		.pipe(dest('./dist/fonts'))
+}
+
 function watching() {
 	browserSync.init({
 		server: {
@@ -105,7 +117,9 @@ exports.script = script;
 exports.html = html;
 exports.image = image;
 exports.sprite = sprite;
+exports.font = font;
 exports.watching = watching;
 exports.cleanDist = cleanDist;
+
 
 exports.default = parallel(style, script, html, image, watching)
