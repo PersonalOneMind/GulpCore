@@ -19,3 +19,4 @@ npm i -D del@6.1.1
 npm i -D gulp-avif
 npm i -D gulp-webp
 npm i -D gulp-newer
+npm i -D gulp-svg-sprite
