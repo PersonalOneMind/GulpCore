@@ -11,7 +11,10 @@ const browserSync = require('browser-sync').create();
 const pug = require('gulp-pug');
 const uglify = require('gulp-uglify-es').default;
 const autoprefixer = require('gulp-autoprefixer');
+const avif = require('gulp-avif');
+const webp = require('gulp-webp');
 const imagemin = require('gulp-imagemin');
+const newer = require('gulp-newer');
 const del = require('del');
 
 function style() {
@@ -43,7 +46,13 @@ function html() {
 }
 
 function image() {
-	return src('src/images/**/*')
+	return src(['src/images/**/*.*', '!./src/images/icons/*.svg'])
+		.pipe(avif({ quality: 50 }))
+
+		.pipe(src('src/images/**/*.*'))
+		.pipe(webp())
+
+		.pipe(src('src/images/**/*.*'))
 		.pipe(imagemin([
 			imagemin.gifsicle({ interlaced: true }),
 			imagemin.mozjpeg({ quality: 75, progressive: true }),
@@ -59,17 +68,14 @@ function image() {
 }
 
 function watching() {
-	watch(['./src/style/sass/**/*.sass'], style);
-	watch(['./src/js/**/*.js'], script);
-	watch(['./src/**/*.pug'], html).on('change', browserSync.reload);
-}
-
-function browsersync() {
 	browserSync.init({
 		server: {
 			baseDir: "./dist"
 		}
 	});
+	watch(['./src/style/sass/**/*.sass'], style);
+	watch(['./src/js/**/*.js'], script);
+	watch(['./src/**/*.pug'], html).on('change', browserSync.reload);
 }
 
 function cleanDist() {
@@ -81,7 +87,6 @@ exports.script = script;
 exports.html = html;
 exports.image = image;
 exports.watching = watching;
-exports.browsersync = browsersync;
 exports.cleanDist = cleanDist;
 
-exports.default = parallel(style, script, html, image, browsersync, watching)
+exports.default = parallel(style, script, html, image, watching)

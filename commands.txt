@@ -16,3 +16,6 @@ npm i -D gulp-autoprefixer
 npm i -D gulp-imagemin
 npm i -D gulp-imagemin@7.1.0
 npm i -D del@6.1.1
+npm i -D gulp-avif
+npm i -D gulp-webp
+npm i -D gulp-newer
