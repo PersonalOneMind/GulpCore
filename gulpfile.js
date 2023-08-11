@@ -40,7 +40,7 @@ function script() {
 
 function html() {
 	return src('./src/**/*.pug')
-		.pipe(pug())
+		.pipe(pug({ pretty: true }))
 		.pipe(dest('./dist'))
 		.pipe(browserSync.stream());
 }
@@ -78,6 +78,7 @@ function watching() {
 	});
 	watch(['./src/style/sass/**/*.sass'], style);
 	watch(['./src/js/**/*.js'], script);
+	watch(['./src/images'], image);
 	watch(['./src/**/*.pug'], html).on('change', browserSync.reload);
 }
 
