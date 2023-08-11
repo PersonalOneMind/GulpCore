@@ -123,3 +123,5 @@ exports.cleanDist = cleanDist;
 
 
 exports.default = parallel(style, script, html, image, watching)
+//gulp sprite
+//gulp font
