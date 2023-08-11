@@ -13,3 +13,6 @@ npm i -g browser-sync
 npm i -D browser-sync
 npm i -D gulp-uglify-es
 npm i -D gulp-autoprefixer
+npm i -D gulp-imagemin
+npm i -D gulp-imagemin@7.1.0
+npm i -D del@6.1.1

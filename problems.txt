@@ -1,6 +1,7 @@
 gulp : Имя "gulp" не распознано как имя командлета, функции, файла сценария или выполняемой программы. Проверьте правильность написания имени, а также наличие и правильность пути, после чего повторите попытку.
 
 Необходимо установить gulp глобально
+---------------------------------------------------
 
 gulp : Невозможно загрузить файл C:\Users\Admin\AppData\Roaming\npm\gulp.ps1, так как выполнение сценариев отключено в этой системе. Для получения дополнительных сведений см. about_Execution_Policies по адресу https:/go
 .microsoft.com/fwlink/?LinkID=135170.
@@ -8,3 +9,15 @@ gulp : Невозможно загрузить файл C:\Users\Admin\AppData\R
 Политика безопасности блокирует выполнение сценариев.
 В PowerShell от админа ввести команду
 Set-ExecutionPolicy Unrestricted -Scope CurrentUser
+---------------------------------------------------
+
+Error [ERR_REQUIRE_ESM]: require() of ES Module G:\Front-end\GulpCore\node_modules\gulp-imagemin\index.js from G:\Front-end\GulpCore\gulpfile.js not supported.
+Instead change the require of index.js in G:\Front-end\GulpCore\gulpfile.js to a dynamic import() which is available in all CommonJS modules.
+    at Object.<anonymous> (G:\Front-end\GulpCore\gulpfile.js:14:18) {
+  code: 'ERR_REQUIRE_ESM'
+
+gulp-imagemin версии 8.0 используется как ES модуль и require() не поддерживается
+Часть библиотек написаны на древнем языке ящеров и не работают как модули, а делать что то нужно
+Костылим костылями костыли...
+Та же проблема с плагином del версии 7.0.0
+---------------------------------------------------
