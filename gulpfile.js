@@ -4,7 +4,7 @@
 // import concat from 'gulp-concat';
 /*Может когда то перепишу под ES6...*/
 
-const { src, dest } = require('gulp');
+const { src, dest, watch } = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const concat = require('gulp-concat');
 
@@ -15,4 +15,9 @@ function styles() {
 		.pipe(dest('dist/style/style.css'))
 }
 
+function watching() {
+	watch(['./src/style/sass/**/*.sass'], styles)
+}
+
 exports.styles = styles;
+exports.watching = watching;
