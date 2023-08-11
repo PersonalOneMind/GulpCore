@@ -10,10 +10,14 @@ const concat = require('gulp-concat');
 const browserSync = require('browser-sync').create();
 const pug = require('gulp-pug');
 const uglify = require('gulp-uglify-es').default;
+const autoprefixer = require('gulp-autoprefixer');
 
 function style() {
 	return src('./src/style/sass/style.sass')
 		.pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+		.pipe(autoprefixer({
+			overrideBrowserslist: ['last 10 version']
+		}))
 		.pipe(concat('style.min.css'))
 		.pipe(dest('dist/style/'))
 		.pipe(browserSync.stream());
