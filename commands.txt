@@ -1,0 +1,7 @@
+npm i -g cli
+npm init
+npm i -D gulp
+npm i -g pug-cli
+npm i pug -D
+npm i -g sass
+npm i sass
