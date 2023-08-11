@@ -9,17 +9,29 @@ const sass = require('gulp-sass')(require('sass'));
 const concat = require('gulp-concat');
 const browserSync = require('browser-sync').create();
 const pug = require('gulp-pug');
+const uglify = require('gulp-uglify-es').default;
 
 function styles() {
 	return src('./src/style/sass/style.sass')
 		.pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(concat('style.min.css'))
-		.pipe(dest('dist/style/style.css'))
+		.pipe(dest('dist/style/'))
+		.pipe(browserSync.stream());
+}
+
+function scripts() {
+	return src([
+		'./src/js/index.js'
+	])
+		.pipe(concat('index.min.js'))
+		.pipe(uglify())
+		.pipe(dest('./dist/js'))
 		.pipe(browserSync.stream());
 }
 
 function watching() {
 	watch(['./src/style/sass/**/*.sass'], styles);
+	watch(['./src/js/**/*.js'], scripts);
 	watch(['./src/*.pug']).on('change', browserSync.reload);
 }
 
@@ -32,6 +44,7 @@ function browsersync() {
 }
 
 exports.styles = styles;
+exports.scripts = scripts;
 exports.watching = watching;
 exports.browsersync = browsersync;
 
