@@ -5,3 +5,4 @@ npm i -g pug-cli
 npm i pug -D
 npm i -g sass
 npm i sass
+npm i gulp-sass -D
