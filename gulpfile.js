@@ -15,6 +15,7 @@ const avif = require('gulp-avif');
 const webp = require('gulp-webp');
 const imagemin = require('gulp-imagemin');
 const newer = require('gulp-newer');
+const svgSprite = require('gulp-svg-sprite');
 const del = require('del');
 
 function style() {
@@ -70,6 +71,19 @@ function image() {
 		.pipe(dest('./dist/images'))
 }
 
+function sprite() {
+	return src('./dist/images/icons/*.svg')
+		.pipe(svgSprite({
+			mode: {
+				stack: {
+					sprite: '../sprite.svg',
+					example: true
+				}
+			}
+		}))
+		.pipe(dest('./dist/images/icons'))
+}
+
 function watching() {
 	browserSync.init({
 		server: {
@@ -90,6 +104,7 @@ exports.style = style;
 exports.script = script;
 exports.html = html;
 exports.image = image;
+exports.sprite = sprite;
 exports.watching = watching;
 exports.cleanDist = cleanDist;
 
