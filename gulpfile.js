@@ -47,12 +47,15 @@ function html() {
 
 function image() {
 	return src(['src/images/**/*.*', '!./src/images/icons/*.svg'])
+		.pipe(newer('./dist/images'))
 		.pipe(avif({ quality: 50 }))
 
 		.pipe(src('src/images/**/*.*'))
+		.pipe(newer('./dist/images'))
 		.pipe(webp())
 
 		.pipe(src('src/images/**/*.*'))
+		.pipe(newer('./dist/images'))
 		.pipe(imagemin([
 			imagemin.gifsicle({ interlaced: true }),
 			imagemin.mozjpeg({ quality: 75, progressive: true }),
