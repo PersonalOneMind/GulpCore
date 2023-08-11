@@ -12,3 +12,4 @@ npm i -D gulp-concat
 npm i -g browser-sync
 npm i -D browser-sync
 npm i -D gulp-uglify-es
+npm i -D gulp-autoprefixer
