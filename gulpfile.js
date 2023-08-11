@@ -11,7 +11,7 @@ const browserSync = require('browser-sync').create();
 const pug = require('gulp-pug');
 const uglify = require('gulp-uglify-es').default;
 
-function styles() {
+function style() {
 	return src('./src/style/sass/style.sass')
 		.pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(concat('style.min.css'))
@@ -19,7 +19,7 @@ function styles() {
 		.pipe(browserSync.stream());
 }
 
-function scripts() {
+function script() {
 	return src([
 		'./src/js/index.js'
 	])
@@ -29,10 +29,17 @@ function scripts() {
 		.pipe(browserSync.stream());
 }
 
+function html() {
+	return src('./src/**/*.pug')
+		.pipe(pug())
+		.pipe(dest('./dist'))
+		.pipe(browserSync.stream());
+}
+
 function watching() {
-	watch(['./src/style/sass/**/*.sass'], styles);
-	watch(['./src/js/**/*.js'], scripts);
-	watch(['./src/*.pug']).on('change', browserSync.reload);
+	watch(['./src/style/sass/**/*.sass'], style);
+	watch(['./src/js/**/*.js'], script);
+	watch(['./src/**/*.pug'], html).on('change', browserSync.reload);
 }
 
 function browsersync() {
@@ -43,8 +50,9 @@ function browsersync() {
 	});
 }
 
-exports.styles = styles;
-exports.scripts = scripts;
+exports.style = style;
+exports.script = script;
+exports.html = html;
 exports.watching = watching;
 exports.browsersync = browsersync;
 
