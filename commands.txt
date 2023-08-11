@@ -3,8 +3,12 @@ npm init
 npm i -g gulp
 npm i -D gulp
 npm i -g pug-cli
-npm i pug -D
+npm i -D pug
+npm i -D gulp-pug
 npm i -g sass
 npm i sass
-npm i gulp-sass -D
+npm i -D gulp-sass
 npm i -D gulp-concat
+npm i -g browser-sync
+npm i -D browser-sync
+npm i -D gulp-uglify-es
