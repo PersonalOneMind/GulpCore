@@ -2,11 +2,8 @@ npm i -g cli
 npm init
 npm i -g gulp
 npm i -D gulp
-npm i -g pug-cli
-npm i -D pug
-npm i -D gulp-pug
 npm i -g sass
-npm i sass
+npm i -D sass
 npm i -D gulp-sass
 npm i -D gulp-concat
 npm i -g browser-sync
@@ -22,3 +19,4 @@ npm i -D gulp-newer
 npm i -D gulp-svg-sprite
 npm i -D gulp-fonter
 npm i -D gulp-ttf2woff2
+npm i -D gulp-file-include
