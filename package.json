@@ -15,6 +15,7 @@
 		"gulp-autoprefixer": "^8.0.0",
 		"gulp-avif": "^1.1.1",
 		"gulp-concat": "^2.6.1",
+		"gulp-file-include": "^2.3.0",
 		"gulp-fonter": "^0.3.0",
 		"gulp-imagemin": "^7.1.0",
 		"gulp-newer": "^1.4.0",
@@ -23,7 +24,6 @@
 		"gulp-ttf2woff2": "^4.0.1",
 		"gulp-uglify-es": "^3.0.0",
 		"gulp-webp": "^4.0.1",
-		"pug": "^3.0.2",
 		"sass": "^1.65.1"
 	}
 }

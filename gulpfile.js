@@ -5,6 +5,7 @@
 /*Может когда то перепишу под ES6...*/
 
 const { src, dest, watch, parallel } = require('gulp');
+const fileInclude = require('gulp-file-include');
 const sass = require('gulp-sass')(require('sass'));
 const concat = require('gulp-concat');
 const browserSync = require('browser-sync').create();
@@ -32,16 +33,20 @@ function style() {
 
 function script() {
 	return src([
-		'./src/js/index.js'
+		'./src/js/main.js'
 	])
-		.pipe(concat('index.min.js'))
+		.pipe(concat('main.min.js'))
 		.pipe(uglify())
 		.pipe(dest('./dist/js'))
 		.pipe(browserSync.stream());
 }
 
 function html() {
-	return src(['./src/pages/**/*.html', '!./src/pages/includes/*.html'])
+	return src('./src/pages/*.html')
+		.pipe(fileInclude({
+			prefix: '@@',
+			basepath: '@file'
+		}))
 		.pipe(dest('./dist'))
 		.pipe(browserSync.stream());
 }
@@ -103,7 +108,8 @@ function watching() {
 	watch(['./src/style/scss/**/*.scss'], style);
 	watch(['./src/js/**/*.js'], script);
 	watch(['./src/images'], image);
-	watch(['./src/**/*.html'], html).on('change', browserSync.reload);
+	watch(['./src/pages/*', './src/pages/includes/*'], html);
+	watch(['./src/**/*.html']).on('change', browserSync.reload);
 }
 
 function cleanDist() {
