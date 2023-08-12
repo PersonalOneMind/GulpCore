@@ -8,7 +8,6 @@ const { src, dest, watch, parallel } = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const concat = require('gulp-concat');
 const browserSync = require('browser-sync').create();
-const pug = require('gulp-pug');
 const uglify = require('gulp-uglify-es').default;
 const autoprefixer = require('gulp-autoprefixer');
 const avif = require('gulp-avif');
@@ -21,7 +20,7 @@ const fonter = require('gulp-fonter');
 const ttf2woff2 = require('gulp-ttf2woff2');
 
 function style() {
-	return src('./src/style/sass/style.sass')
+	return src('./src/style/scss/style.scss')
 		.pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(autoprefixer({
 			overrideBrowserslist: ['last 10 version']
@@ -42,8 +41,7 @@ function script() {
 }
 
 function html() {
-	return src(['./src/pages/**/*.pug', '!./src/pages/includes/*.pug'])
-		.pipe(pug({ pretty: true }))
+	return src(['./src/pages/**/*.html', '!./src/pages/includes/*.html'])
 		.pipe(dest('./dist'))
 		.pipe(browserSync.stream());
 }
@@ -102,10 +100,10 @@ function watching() {
 			baseDir: "./dist"
 		}
 	});
-	watch(['./src/style/sass/**/*.sass'], style);
+	watch(['./src/style/scss/**/*.scss'], style);
 	watch(['./src/js/**/*.js'], script);
 	watch(['./src/images'], image);
-	watch(['./src/**/*.pug'], html).on('change', browserSync.reload);
+	watch(['./src/**/*.html'], html).on('change', browserSync.reload);
 }
 
 function cleanDist() {
