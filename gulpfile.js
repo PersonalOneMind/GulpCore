@@ -21,7 +21,10 @@ const fonter = require('gulp-fonter');
 const ttf2woff2 = require('gulp-ttf2woff2');
 
 function style() {
-	return src('./src/style/scss/style.scss')
+	return src([
+		'./node_modules/@csstools/normalize.css/normalize.css',
+		'./src/style/scss/style.scss'
+	])
 		.pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
 		.pipe(autoprefixer({
 			overrideBrowserslist: ['last 10 version']
