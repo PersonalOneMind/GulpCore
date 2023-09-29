@@ -20,3 +20,4 @@ npm i -D gulp-svg-sprite
 npm i -D gulp-fonter
 npm i -D gulp-ttf2woff2
 npm i -D gulp-file-include
+npm i -D @csstools/normalize.css
